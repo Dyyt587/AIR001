@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-08-09 13:35:21
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-08-09 16:34:32
+ * @LastEditTime: 2023-08-09 17:29:41
  * @FilePath: \AIR001\AIR001.ino
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -20,6 +20,15 @@
 /**
  * 实现ws2812
  * 实现iic通讯
+ *  协议：
+ *      A [param1]
+ *          param1: reboot 重启
+ *                  LinkStart 启动动态地址分配模式
+ *                  LinkEnd 关闭动态地址分配模式
+ * 
+ *      V[speed rmp]        转每分钟
+ *      T[Torque N*m]       牛米
+ *      P[position degree]  一圈360
  * 实现电机转动
  * 实现电机位置闭环
  * 实现通讯协议
@@ -72,19 +81,19 @@ void setup()
 {
     Serial.begin(115200);
 
-    Wire.setSDA(PA_2);
-    Wire.setSCL(PA_3);
+    Wire.setSDA(PF_0);
+    Wire.setSCL(PF_1);
 
-    Wire.begin(0xff0);
+    Wire.begin(0x0a);
     Wire.onReceive(IIC_Handle);
 
 }
 
 void loop()
 {
-    Serial.print("tt");
-    Wire.beginTransmission(8);
-    Wire.write('8');
-    Wire.endTransmission(true);
+    Serial.print("tt1");
+    // Wire.beginTransmission(8);
+    // Wire.write('8');
+    // Wire.endTransmission(true);
 
 }

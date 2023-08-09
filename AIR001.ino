@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-08-09 13:35:21
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-08-09 22:29:09
+ * @LastEditTime: 2023-08-09 22:38:23
  * @FilePath: \AIR001\AIR001.ino
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -202,15 +202,18 @@ class cmdmanger
         FIND_CMD('V')
         {
             cmds[0]=V;
+            cmds[1]=none;
         }else
         FIND_CMD('T')
         {
             cmds[0]=T;
+            cmds[1]=none;
 
         }else
         FIND_CMD('P')
         {
             cmds[0]=P;
+            cmds[1]=none;
 
         }else
         FIND_CMD('I')
@@ -219,6 +222,8 @@ class cmdmanger
             FIND_PARAM1("all")
             {
             cmds[1]=all;
+            cmds[1]=none;
+
             }
             FIND_PARAM1("vbus")
             {

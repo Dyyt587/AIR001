@@ -1,0 +1,1 @@
+-e "-fmacro-prefix-map=\"C:\\Users\\Administrator\\AppData\\Local\\Arduino15\\packages\\AirM2M\\hardware\\AirMCU\\0.3.3\"=." 

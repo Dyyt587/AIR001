@@ -1,0 +1,12 @@
+#line 1 "C:\\Users\\Administrator\\Desktop\\AIR001\\arduino\\build\\build.options.json"
+{
+  "additionalFiles": "..\\..\\..,..\\..\\..,..\\..\\..\\..,..\\..\\..\\..,..\\..\\..\\..\\..\\..,..\\..\\..\\..\\..\\..,..\\..\\..\\..\\..,..\\..\\..\\..\\..,..\\..\\..\\..\\..\\..\\..",
+  "builtInToolsFolders": "",
+  "compiler.optimization_flags": "",
+  "customBuildProperties": "",
+  "fqbn": "AirM2M:AirMCU:Air001Dev:UploadSpeed=115200,ClockSourceAndFrequency=HSI4M_HCLK4M,LowSpeedClockSource=None,xserial=generic,dbg=none,opt=osstd,SupplyVoltage=3V3",
+  "hardwareFolders": "C:\\Users\\Administrator\\AppData\\Local\\Arduino15\\packages",
+  "otherLibrariesFolders": "C:\\Users\\Administrator\\Documents\\Arduino\\libraries",
+  "runtime.ide.version": "10607",
+  "sketchLocation": "C:\\Users\\Administrator\\Desktop\\AIR001"
+}

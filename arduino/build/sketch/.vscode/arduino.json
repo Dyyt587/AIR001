@@ -1,0 +1,8 @@
+#line 1 "C:\\Users\\Administrator\\Desktop\\AIR001\\.vscode\\arduino.json"
+{
+    "configuration": "UploadSpeed=115200,ClockSourceAndFrequency=HSI4M_HCLK4M,LowSpeedClockSource=None,xserial=generic,dbg=none,opt=osstd,SupplyVoltage=3V3",
+    "board": "AirM2M:AirMCU:Air001Dev",
+    "port": "COM6",
+    "output": "./arduino/build",
+    "sketch": "AIR001.ino"
+}

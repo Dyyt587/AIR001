@@ -2,5 +2,6 @@
     "configuration": "UploadSpeed=115200,ClockSourceAndFrequency=HSI4M_HCLK4M,LowSpeedClockSource=None,xserial=generic,dbg=none,opt=osstd,SupplyVoltage=3V3",
     "board": "AirM2M:AirMCU:Air001Dev",
     "output": "C:\\Users\\28968\\Documents\\Arduino\\build",
-    "sketch": "AIR001.ino"
+    "sketch": "AIR001.ino",
+    "port": "COM7"
 }

@@ -48,7 +48,7 @@
 #define CLOCK_PIN  PF_0  // SCLK/SPI2
 
 // Create the global ws2812fx instance.
-// Note: APA102 LEDs expect the pixel data in blue/green/red order, so use
+// Note: APA102 LEDs expect the pixel data in blue/green/red order, so use 
 // the NEO_BGR flag. For other types of LEDs change it accordingly.
 WS2812FX ws2812fx = WS2812FX(LED_COUNT, DATA_PIN, NEO_RGB + NEO_KHZ800);
 
@@ -71,9 +71,8 @@ void IIC_Handle(int callback)
 void setup()
 {
     Serial.begin(115200);
-
-    Wire.setSDA(PA_2);
-    Wire.setSCL(PA_3);
+    // Wire.setSDA(PA_2);
+    // Wire.setSCL(PA_3);
 
     Wire.begin(0xff0);
     Wire.onReceive(IIC_Handle);

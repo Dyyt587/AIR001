@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-08-09 13:35:21
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-08-09 17:29:41
+ * @LastEditTime: 2023-08-09 18:05:39
  * @FilePath: \AIR001\AIR001.ino
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -21,14 +21,30 @@
  * 实现ws2812
  * 实现iic通讯
  *  协议：
- *      A [param1]
+ *      S [param1][param2] 由主机发送
  *          param1: reboot 重启
- *                  LinkStart 启动动态地址分配模式
- *                  LinkEnd 关闭动态地址分配模式
- * 
- *      V[speed rmp]        转每分钟
- *      T[Torque N*m]       牛米
- *      P[position degree]  一圈360
+ *                  linkStart   启动动态地址分配模式
+ *                  linkEnd     关闭动态地址分配模式
+ *                  address     分配或获取地址 oprntional [7位地址]
+ *                  led         设置led灯显示模式
+ *                      param2: 0 常亮，红
+ *                              1 常亮，绿
+ *                              2 常亮，蓝
+ *                              3 
+ *      M [param1] 由从机发送
+ *          param1: address     从机请求获取地址，仅在动态地址分配模式下有用
+ *                  error    从机反馈异常
+ *                      param2: overSpeed
+ *                              overCurrent
+ *                              overTemperature
+ *                              syetemError
+ *                              overVoltage
+ *                              unknownError
+ *                 vbus
+ *          
+ *      V[speed rmp]        转每分钟  由主/从机发送
+ *      T[Torque N*m]       牛米      由主/从机发送  
+ *      P[position degree]  一圈360   由主/从机发送
  * 实现电机转动
  * 实现电机位置闭环
  * 实现通讯协议

@@ -1,8 +1,8 @@
 /*
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-08-09 13:35:21
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-08-09 22:38:23
+ * @LastEditors: dyyt 805207319@qq.com
+ * @LastEditTime: 2023-08-09 23:04:08
  * @FilePath: \AIR001\AIR001.ino
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -87,24 +87,24 @@ class cmdmanger
         P,
 
         I,
-        reboot,    // 重启
-        linkStart, // 启动动态地址分配模式
-        linkEnd,   // 关闭动态地址分配模式
-        address,   // 分配地址 oprntional [7位地址]
-        led,       // 设置led灯显示模式
+          reboot,    // 重启
+          linkStart, // 启动动态地址分配模式
+          linkEnd,   // 关闭动态地址分配模式
+          address,   // 分配地址 oprntional [7位地址]
+          led,       // 设置led灯显示模式
 
-        requireAddr,
-        error, //    从机反馈异常
-        overSpeed,
-        overCurrent,
-        overTemperature,
-        syetemError,
-        overVoltage,
-        unknownError,
-        all,     // 所有信息
-        vbus,    // 总线电压
-        version, // 版本号，id号，用户定义号
-        otherData = 99999,
+          requireAddr,
+          error, //    从机反馈异常
+          overSpeed,
+          overCurrent,
+          overTemperature,
+          syetemError,
+          overVoltage,
+          unknownError,
+          all,     // 所有信息
+          vbus,    // 总线电压
+          version, // 版本号，id号，用户定义号
+          otherData = 99999,
     };
     typedef int cmdID;
     typedef union
@@ -119,8 +119,8 @@ class cmdmanger
     int getcmd(char* str, cmdID cmds[3], cmdData *data)
     {
         #define FIND_CMD(x) if(str[0]==x)
-        #define FIND_PARAM1(x) if(strpbrk(str,x))
-        #define FIND_PARAM2(x) if(strpbrk(str,x))
+        #define FIND_PARAM1(x) if(strpbrk(str,x)==1)
+        #define FIND_PARAM2(x) if(strpbrk(str,x)<64)
         FIND_CMD('S')
         {
             cmds[0]=S;
@@ -142,15 +142,17 @@ class cmdmanger
             {
                 cmds[1]=address;
                 cmds[2]=otherData;
-                //TODO:!!!!!!!!!!!!!!!!!!!
-                data->Int=1;
+                
+                data->Int=0xffffffff;
+                memcopy(str[8],data->Int,4);
             }
             FIND_PARAM1("led")
             {
                 cmds[1]=led;
                 cmds[2]=otherData;
                 //TODO:!!!!!!!!!!!!!!!!!!!
-                data->Int=1;
+                data->Int=0xffffffff;
+                memcopy(str[4],data->Int,4);
             }
            
         }else
@@ -203,18 +205,22 @@ class cmdmanger
         {
             cmds[0]=V;
             cmds[1]=none;
+            data->Float=0;
+            memcopy(str[1],data->Float,4);
         }else
         FIND_CMD('T')
         {
             cmds[0]=T;
             cmds[1]=none;
-
+            data->Float=0;
+            memcopy(str[1],data->Float,4);
         }else
         FIND_CMD('P')
         {
             cmds[0]=P;
             cmds[1]=none;
-
+            
+            memcopy(str[1],data->Float,4);
         }else
         FIND_CMD('I')
         {
@@ -222,18 +228,26 @@ class cmdmanger
             FIND_PARAM1("all")
             {
             cmds[1]=all;
-            cmds[1]=none;
+            cmds[2]=none;
 
             }
             FIND_PARAM1("vbus")
             {
             cmds[1]=vbus;
+            cmds[2]=none;
+
             }
             FIND_PARAM1("version")
             {
             cmds[1]=version;
+            cmds[2]=none;
+
             }
         }
+
+    }
+    int cmdHandle(cmdID cmds[3], cmdData *data)
+    {
 
     }
 };

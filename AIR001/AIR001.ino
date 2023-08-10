@@ -32,14 +32,9 @@
 
 */
 
-
 #include "Wire.h"
 #include "WS2812FX.h"
 #include "SPI.h"
-
-
-
-
 
 
 
@@ -71,19 +66,19 @@ void IIC_Handle(int callback)
 void setup()
 {
     Serial.begin(115200);
-    // Wire.setSDA(PA_2);
-    // Wire.setSCL(PA_3);
+    Wire.setSDA(PF_1);
+    Wire.setSCL(PF_0);
 
-    Wire.begin(0xff0);
+    Wire.begin(0x0a);
     Wire.onReceive(IIC_Handle);
 
 }
 
 void loop()
 {
-    Serial.print("tt");
-    Wire.beginTransmission(8);
-    Wire.write('8');
-    Wire.endTransmission(true);
+    // Serial.print("tt");
+    // Wire.beginTransmission(8);
+    // Wire.write('8');
+    // Wire.endTransmission(true);
 
 }

@@ -19,7 +19,7 @@
             ],
             "intelliSenseMode": "gcc-x64",
             "includePath": [
-                "D:\\items\\GitHub\\AIR001",
+                "D:\\items\\GitHub\\AIR001\\AIR001",
                 "C:\\Users\\28968\\AppData\\Local\\Arduino15\\packages\\AirM2M\\hardware\\AirMCU\\0.3.3\\cores\\AirMCU\\avr",
                 "C:\\Users\\28968\\AppData\\Local\\Arduino15\\packages\\AirM2M\\hardware\\AirMCU\\0.3.3\\cores\\AirMCU\\air",
                 "C:\\Users\\28968\\AppData\\Local\\Arduino15\\packages\\AirM2M\\hardware\\AirMCU\\0.3.3\\cores\\AirMCU\\air\\LL",

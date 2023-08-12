@@ -1,0 +1,34 @@
+project:
+  linker:
+    - script: project_rtthreadgd32e230.sct
+  groups:
+    - group: Applications
+      files:
+        - file: applications/main.c
+    - group: GD32_Lib
+      files:
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_adc.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_cmp.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_crc.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_dbg.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_dma.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_exti.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_fmc.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_fwdgt.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_gpio.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_i2c.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_misc.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_pmu.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_rcu.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_rtc.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_spi.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_syscfg.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_timer.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_usart.c
+        - file: Libraries/GD32E230_standard_peripheral/Source/gd32e230_wwdgt.c
+        - file: Libraries/CMSIS/GD/GD32E230/Source/system_gd32e230.c
+        - file: Libraries/CMSIS/GD/GD32E230/Source/ARM/startup_gd32e230.s
+  components:
+    - component: ARM::CMSIS:CORE
+    - component: RealThread::RTOS&RT-Thread:kernel
+    - component: RealThread::RTOS&RT-Thread:shell

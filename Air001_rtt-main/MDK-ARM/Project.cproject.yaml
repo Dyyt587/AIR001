@@ -1,0 +1,68 @@
+project:
+  linker:
+    - script: Project_Project.sct
+  groups:
+    - group: rtthread/libcpu
+      files:
+        - file: ../rtthread/libcpu/arm/cortex-m0/context_rvds.S
+          misc:
+            - ASM:
+                - -masm=auto
+        - file: ../rtthread/libcpu/arm/cortex-m0/cpuport.c
+    - group: rtthread/core
+      files:
+        - file: ../rtthread/src/clock.c
+        - file: ../rtthread/src/components.c
+        - file: ../rtthread/src/cpu.c
+        - file: ../rtthread/src/idle.c
+        - file: ../rtthread/src/ipc.c
+        - file: ../rtthread/src/irq.c
+        - file: ../rtthread/src/kservice.c
+        - file: ../rtthread/src/mem.c
+        - file: ../rtthread/src/memheap.c
+        - file: ../rtthread/src/mempool.c
+        - file: ../rtthread/src/object.c
+        - file: ../rtthread/src/scheduler.c
+        - file: ../rtthread/src/slab.c
+        - file: ../rtthread/src/thread.c
+        - file: ../rtthread/src/timer.c
+    - group: finsh
+      files:
+        - file: ../rtthread/components/finsh/cmd.c
+        - file: ../rtthread/components/finsh/finsh_port.c
+        - file: ../rtthread/components/finsh/msh.c
+        - file: ../rtthread/components/finsh/shell.c
+    - group: Drivers/AIR001xx_HAL_Driver
+      files:
+        - file: ../Libraries/AIR001xx_HAL_Driver/Src/air001xx_hal.c
+        - file: ../Libraries/AIR001xx_HAL_Driver/Src/air001xx_hal_cortex.c
+        - file: ../Libraries/AIR001xx_HAL_Driver/Src/air001xx_hal_dma.c
+        - file: ../Libraries/AIR001xx_HAL_Driver/Src/air001xx_hal_flash.c
+        - file: ../Libraries/AIR001xx_HAL_Driver/Src/air001xx_hal_gpio.c
+        - file: ../Libraries/AIR001xx_HAL_Driver/Src/air001xx_hal_iwdg.c
+        - file: ../Libraries/AIR001xx_HAL_Driver/Src/air001xx_hal_pwr.c
+        - file: ../Libraries/AIR001xx_HAL_Driver/Src/air001xx_hal_rcc.c
+        - file: ../Libraries/AIR001xx_HAL_Driver/Src/air001xx_hal_rcc_ex.c
+        - file: ../Libraries/AIR001xx_HAL_Driver/Src/air001xx_hal_uart.c
+        - file: ../Libraries/AIR001xx_HAL_Driver/Src/air001xx_hal_spi.c
+        - file: ../Libraries/AIR001xx_HAL_Driver/Src/air001xx_hal_spi_ex.c
+        - file: ../Libraries/AIR001xx_HAL_Driver/Src/air001xx_hal_tim.c
+        - file: ../Libraries/AIR001xx_HAL_Driver/Src/air001xx_hal_tim_ex.c
+    - group: BSP/Air001_Core_Board
+      files:
+        - file: ../Libraries/BSP/AIR001_Core_Board/air001_Core_Board.c
+    - group: Application/User
+      files:
+        - file: ../Src/air001xx_hal_msp.c
+        - file: ../Src/air001xx_it.c
+        - file: ../Src/board.c
+        - file: ../Src/main.c
+        - file: ringbuff.c
+        - file: ringbuff.h
+        - file: ../Src/ws2812_spi_dma.c
+  components:
+    - component: ARM::CMSIS:CORE
+    - component: Keil::Device:Startup
+      misc:
+        - ASM:
+            - -masm=auto

@@ -1,0 +1,3 @@
+project:
+  linker:
+    - script: board/linker_scripts/LPC55S69_cm33_core0_flash_mdk.scf

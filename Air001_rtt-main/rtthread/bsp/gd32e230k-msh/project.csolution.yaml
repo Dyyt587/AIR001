@@ -1,0 +1,59 @@
+solution:
+  created-by: uv2csolution@1.0.0
+  created-for: CMSIS-Toolbox@2.0.0
+  packs:
+    - pack: GigaDevice::GD32E23x_DFP
+    - pack: ARM::CMSIS
+    - pack: RealThread::RT-Thread
+    - pack: ARM::CMSIS-NN
+    - pack: ARM::CMSIS-DSP
+  target-types:
+    - type: rtthreadgd32e230
+      device: GD32E230K8
+      processor:
+        trustzone: non-secure
+      compiler: AC6
+      add-path:
+        - .
+        - ../../include
+        - applications
+        - Libraries/CMSIS/GD/GD32E230/Include
+        - Libraries/CMSIS
+        - Libraries/GD32E230_standard_peripheral/Include
+        - ../../libcpu/arm/common
+        - ../../libcpu/arm/cortex-m23
+        - ../../components/drivers/include
+        - ../../components/drivers/spi
+        - ../../components/drivers/spi/sfud/inc
+        - ../../components/libc/compilers/common
+        - inc
+      debug: "on"
+      define:
+        - GD32E230
+      optimize: size
+      misc:
+        - C-CPP:
+            - -fno-rtti
+            - -funsigned-char
+            - -fshort-enums
+            - -fshort-wchar
+            - -ffunction-sections
+            - -std=c90
+          ASM:
+            - -masm=auto
+          Link:
+            - --map
+            - --load_addr_map_info
+            - --xref
+            - --callgraph
+            - --symbols
+            - --info sizes
+            - --info totals
+            - --info unused
+            - --info veneers
+            - --list
+            - --strict
+            - --summary_stderr
+            - --info summarysizes
+  projects:
+    - project: project.cproject.yaml

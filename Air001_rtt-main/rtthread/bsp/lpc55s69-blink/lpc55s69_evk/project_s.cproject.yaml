@@ -1,0 +1,69 @@
+project:
+  linker:
+    - script: board/linker_scripts/LPC55S69_cm33_core0_flash_mdk_s.scf
+  groups:
+    - group: Applications
+      files:
+        - file: applications_s/main.c
+        - file: applications_s/app.h
+        - file: applications_s/trustzone/tzm_config.c
+        - file: applications_s/trustzone/tzm_config.h
+        - file: applications_s/trustzone/veneer_table.c
+        - file: applications_s/trustzone/veneer_table.h
+        - file: board/clock_config.c
+        - file: board/clock_config.h
+        - file: applications_s/app_printf.c
+        - file: applications_s/app_printf.h
+        - file: applications_s/tz_context.c
+    - group: CMSIS
+      files:
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/system_LPC55S69_cm33_core0.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/fsl_device_registers.h
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/LPC55S69_cm33_core0.h
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/system_LPC55S69_cm33_core0.h
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/LPC55S69_cm33_core0_features.h
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/arm/startup_LPC55S69_cm33_core0.s
+          misc:
+            - ASM:
+                - -masm=auto
+    - group: Libraries
+      files:
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_anactrl.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_casper.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_clock.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_cmp.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_common.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_crc.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_ctimer.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_dma.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_flexcomm.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_gint.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_gpio.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_hashcrypt.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_i2c.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_i2c_dma.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_i2s.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_i2s_dma.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_iap.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_inputmux.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_lpadc.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_mrt.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_ostimer.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_pint.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_plu.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_power.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_prince.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_puf.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_reset.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_rng.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_rtc.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_sctimer.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_sdif.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_spi.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_spi_dma.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_sysctl.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_usart.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_usart_dma.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_utick.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/drivers/fsl_wwdt.c
+        - file: ../Libraries/LPC55S69/devices/LPC55S69/arm/keil_lib_power_cm33_core0.lib

@@ -24,7 +24,7 @@
 #include <rtthread.h>
 #include "ws2812_spi_dma.h"
 #include "motor_pwm.h"
-#include "motor_driver.h"
+
 #include "encode.h"
 /* Private define ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -74,10 +74,24 @@ int main(void)
 	
   motor_Init();
 	
-  Motor_Set_CH3(5000);
-  Motor_Set_CH4(0);
+  pid_speed.Kp = 85;
+	pid_speed.Ki = 10;
+	pid_speed.Kd = 25;
+	
+	pid_angle.Kp = 10;
+
+  
   while (1)
   {
+//		set_Speed(200);
+//		int a = (int)get_Speed();
+//    rt_kprintf("Speed:%d   \r\n",a);
+//		
+		Set_Angle(500);
+		int a = (int)get_Angle();
+    rt_kprintf("Angle:%d   \r\n",a);
+		// rt_kprintf("PID:%d,%d,%d\r\n",pid_speed.Kp,pid_speed.Ki,pid_speed.Kd);
+		
 //		 RGB_Reflash();
 
 //		static int cnt=0;

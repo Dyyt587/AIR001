@@ -1,23 +1,9 @@
 
 #include "encode.h"
-//#include "Motor_PWM.h"
-/*
-一圈脉冲：4
-减速器一圈：400
-*/
-typedef struct
-{
-    int count_old;
-	  int count;
-	
-    float speed;
-	  float angle; 
-	  uint8_t cycle;
-	  uint8_t pluse;
-	  int reduction_ratio;
-	
-}ENCODE;
 
+#include "stdbool.h"
+
+ 
 #define defaultcycle 10
 #define defaultpluse 4
 #define defaultreduction_ratio 100
@@ -28,6 +14,25 @@ rt_timer_t encodeTimer;
 
 struct rt_timer static_timer;
 
+struct PID pid_speed;
+struct PID pid_angle;
+
+struct rt_thread  PID_Thread;
+rt_uint32_t PID_Thread_num[64];
+
+bool _IF_SPEED = true;
+
+#define a_speed   0.5f                // 滤波系数a（0-1）
+
+
+int filter(int new_val) 
+{ 
+ static float value; 
+ float ff=(float)new_val;
+ int out=a_speed*value + (1.0f-a_speed)*ff;
+ value = ff;
+return out;
+ }
 
 void _ENCODE_GPIO_Init(void)
 {
@@ -57,19 +62,61 @@ void _ENCODE_GPIO_Init(void)
 
 /*计算速度*/
 void _countSpeed(void* a){
-	int count = encode.count - encode.count_old;
+
+
+}
+
+//更新PID
+void _pidRun(struct PID *pid) {
+	int ki_out ;
+	
+  pid->error = pid->setpoint - pid->input; //计算偏差值
+  pid->error_sum += pid->error; //计算偏差累积值
+	ki_out = pid->Ki * pid->error_sum ;
+	if(ki_out>400)ki_out =400;
+	
+  pid->output = pid->Kp * pid->error + ki_out + pid->Kd * (pid->error - pid->error_last); //计算输出值
+
+  pid->error_last = pid->error; //更新上一次的偏差值
+  
+}
+
+
+void _PID_Thread_entry(void *param ){
+	while (1){
+		
+			int count = encode.count - encode.count_old;
    
     // 计算转速(count),数据类型转换
 	
-    encode.speed = (float)encode.count_old / (encode.reduction_ratio * encode.cycle) * 1000*60;// 转的圈数/时间*1000*60,将原来的r/ms转换成r/min
+    encode.speed = count * 1000*60 / (encode.reduction_ratio * encode.cycle);// 转的圈数/时间*1000*60,将原来的r/ms转换成r/min
 
     // Serial.println(speedl);
-    // count置零
-    encode.count = 0;
-	
+   
 		encode.count_old  = encode.count;
+		
+  encode.angle=encode.count*360.0/(defaultpluse *defaultreduction_ratio);//把count转换成轮子角度
+		                              
+  if(_IF_SPEED)
+			pid_angle.output = pid_angle.setpoint;
+   else {
+			pid_angle.input =  (int)(encode.angle*100);
+			_pidRun(&pid_angle);
+	}
+  
+  pid_speed.setpoint = pid_angle.output;
+	
+	pid_speed.input =  (int)(encode.speed*100);
+  _pidRun(&pid_speed);
+		
 
+		
+	motor_Contral(filter(pid_speed.output)/100);
+	
+	rt_thread_mdelay(encode.cycle);
+	}
 }
+
 
 /*初始化编码器*/
 void encode_Init(int singlePluse,int reduction_ratio){
@@ -85,6 +132,15 @@ void encode_Init(int singlePluse,int reduction_ratio){
   rt_timer_init (&static_timer,"encodeTimer",_countSpeed,NULL,encode.cycle,RT_TIMER_FLAG_PERIODIC | RT_TIMER_FLAG_HARD_TIMER );
 	
   rt_timer_start (&static_timer);
+  rt_thread_init(&PID_Thread,
+                        "PID_Thread",
+                        _PID_Thread_entry,
+                        NULL,
+                        PID_Thread_num,
+                        sizeof (PID_Thread_num),
+                        1,
+                        1);
+	rt_thread_startup	(&PID_Thread);										
 	
 
 }
@@ -136,4 +192,31 @@ return (float)encode.count*360.0/400.0;
 float get_Speed(){
 return encode.speed;
 }
+
+void motor_Contral(int pwm){
+    if(pwm>0){
+    Motor_Set_CH4(0);
+    Motor_Set_CH3(pwm);
+    }else{
+    Motor_Set_CH4(-pwm);
+    Motor_Set_CH3(0);
+    }
+}
+
+
+
+void Set_Speed(int Speed){
+ 	pid_angle.setpoint  = (int)(Speed*100);
+	
+  _IF_SPEED = true;
+}
+
+void Set_Angle(int Angle){
+  pid_angle.setpoint  = Angle*100;
+
+    _IF_SPEED = false;
+
+}
+
+
 

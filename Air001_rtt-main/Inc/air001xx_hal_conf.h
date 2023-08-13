@@ -136,6 +136,7 @@
 
 #ifdef HAL_GPIO_MODULE_ENABLED
  #include "air001xx_hal_gpio.h"
+ #include "air001xx_hal_gpio_ex.h"
 #endif /* HAL_GPIO_MODULE_ENABLED */
 
 #ifdef HAL_CORTEX_MODULE_ENABLED

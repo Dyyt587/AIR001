@@ -2,10 +2,11 @@
  * @Author: dyyt
  * @Date: 2023-08-12 16:11:04
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-08-12 19:44:11
+ * @LastEditTime: 2023-08-13 13:43:15
  * @FilePath: \Air001_rtt-main\Src\interface_iic.c
  * @Description:
  */
+#include "interface_iic.h"
 #include "interface_iic.h"
 #include "air001xx_hal.h"
 #include "stdlib.h"
@@ -46,7 +47,7 @@ void Rx_Pack_Callback(void)
 {
     float param[2] = {0}; // 预留一个参数
     char cmd;
-    memcpy(param, &aRxBuffer[RxBuffer_index - 2 * sizeof(param)], 2 * sizeof(param));
+    memcpy( &aRxBuffer[RxBuffer_index - 2 * sizeof(param)],param, 2 * sizeof(param));
     cmd = aRxBuffer[RxBuffer_index - 2 * sizeof(param) - 1];
     if (cmd == 'S')
     {
@@ -155,7 +156,7 @@ void interface_init(void)
 
 void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *hi2c)
 {
-    if (aRxBuffer[RxBuffer_index] = 'S')
+    if (aRxBuffer[RxBuffer_index] == 'S')
     { // 寻找包头
         RxBuffer_State = Rx_Started;
     }

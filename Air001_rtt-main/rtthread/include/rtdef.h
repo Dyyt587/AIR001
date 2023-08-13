@@ -35,7 +35,8 @@
 
 /* include rtconfig header to import configuration */
 #include <rtconfig.h>
-
+#define RT_USING_FINSH
+#define FINSH_USING_SYMTAB
 #ifdef __cplusplus
 extern "C" {
 #endif

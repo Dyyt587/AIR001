@@ -11,6 +11,10 @@
 #if defined(RTE_USING_FINSH)
 #define RT_USING_FINSH
 #endif //RTE_USING_FINSH
+
+
+#define RT_USING_FINSH
+#define FINSH_USING_SYMTAB
 #define RT_USING_FINSH
 #include "finsh_config.h"
 #endif //(__CC_ARM) || (__CLANG_ARM)

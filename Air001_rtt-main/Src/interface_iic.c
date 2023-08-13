@@ -2,16 +2,17 @@
  * @Author: dyyt
  * @Date: 2023-08-12 16:11:04
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-08-13 13:43:15
+ * @LastEditTime: 2023-08-13 14:05:34
  * @FilePath: \Air001_rtt-main\Src\interface_iic.c
  * @Description:
  */
 #include "interface_iic.h"
-#include "interface_iic.h"
+#include "air001xx_hal_gpio_ex.h"
 #include "air001xx_hal.h"
 #include "stdlib.h"
 #include "string.h"
 #include "rtthread.h"
+#include "encode.h"
 
 extern DMA_HandleTypeDef HdmaCh1;
 extern DMA_HandleTypeDef HdmaCh2;
@@ -53,15 +54,18 @@ void Rx_Pack_Callback(void)
     {
         control.mode = Speed_Mode;
         control.speed_target = param[0];
+        Set_Speed(param[0]);
     }
     else if (cmd == 'P')
     {
         control.mode = Angle_Mode;
         control.angle_target = param[0];
+        Set_Angle(param[0]);
     }
     else
     {
         control.mode = Standerby_Mode;
+        //TODO
     }
 }
 void interface_updata(float speed, float angle)

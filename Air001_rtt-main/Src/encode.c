@@ -205,13 +205,13 @@ void motor_Contral(int pwm){
 
 
 
-void Set_Speed(int Speed){
+void Set_Speed(float Speed){
  	pid_angle.setpoint  = (int)(Speed*100);
 	
   _IF_SPEED = true;
 }
 
-void Set_Angle(int Angle){
+void Set_Angle(float Angle){
   pid_angle.setpoint  = Angle*100;
 
     _IF_SPEED = false;

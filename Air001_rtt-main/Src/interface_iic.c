@@ -2,17 +2,19 @@
  * @Author: dyyt
  * @Date: 2023-08-12 16:11:04
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-08-12 19:06:31
+ * @LastEditTime: 2023-08-12 19:44:11
  * @FilePath: \Air001_rtt-main\Src\interface_iic.c
  * @Description:
  */
 #include "interface_iic.h"
-#include "air001xx_hal_gpio.h"
-#include "air001xx_hal_i2c.h"
-#include "stdio.h"
+#include "air001xx_hal.h"
+#include "stdlib.h"
+#include "string.h"
+#include "rtthread.h"
 
 extern DMA_HandleTypeDef HdmaCh1;
 extern DMA_HandleTypeDef HdmaCh2;
+I2C_HandleTypeDef I2cHandle;
 
 uint8_t aRxBuffer[16] = {0};
 typedef enum
@@ -23,25 +25,56 @@ typedef enum
 } Interface_Rx_State_e;
 Interface_Rx_State_e RxBuffer_State = None;
 int RxBuffer_index = 0;
+enum
+{
+    Standerby_Mode = 0,
+    Speed_Mode,
+    Angle_Mode,
+};
 typedef struct
 {
     char mode; // 0待机，1速度，2位置,
-    float speed;
-    float position;
+    float speed_target;
+    float angle_target;
+    float speed_current;
+    float angle_current;
 
 } Control_t;
 Control_t control;
 // 本函数内部使用，故不窜入参数
 void Rx_Pack_Callback(void)
 {
-    float param[2] = {0};
+    float param[2] = {0}; // 预留一个参数
     char cmd;
     memcpy(param, &aRxBuffer[RxBuffer_index - 2 * sizeof(param)], 2 * sizeof(param));
     cmd = aRxBuffer[RxBuffer_index - 2 * sizeof(param) - 1];
+    if (cmd == 'S')
+    {
+        control.mode = Speed_Mode;
+        control.speed_target = param[0];
+    }
+    else if (cmd == 'P')
+    {
+        control.mode = Angle_Mode;
+        control.angle_target = param[0];
+    }
+    else
+    {
+        control.mode = Standerby_Mode;
+    }
+}
+void interface_updata(float speed, float angle)
+{
+    control.speed_current = speed;
+    control.angle_current = angle;
 }
 
 void interface_init(void)
 {
+#define I2C_ADDRESS        0x08             /* 本机地址0xA0 */
+#define I2C_SPEEDCLOCK   100000             /* 通讯速度100K */
+#define I2C_DUTYCYCLE    I2C_DUTYCYCLE_2    /* 占空比 */
+
     /* I2C初始化 */
     I2cHandle.Instance = I2C;                                 /* I2C */
     I2cHandle.Init.ClockSpeed = I2C_SPEEDCLOCK;               /* I2C通讯速度 */
@@ -51,7 +84,7 @@ void interface_init(void)
     I2cHandle.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;     /* 允许时钟延长 */
     if (HAL_I2C_Init(&I2cHandle) != HAL_OK)
     {
-        Error_Handler();
+        while(1);
     }
     GPIO_InitTypeDef GPIO_InitStruct = {0};
 
@@ -61,10 +94,10 @@ void interface_init(void)
     __HAL_RCC_GPIOF_CLK_ENABLE();  /* GPIOF时钟使能 */
 
     /**I2C引脚配置
-    PF0     ------> I2C1_SCL
-    PF1     ------> I2C1_SDA
+    PA3     ------> I2C1_SCL
+    PA2     ------> I2C1_SDA
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_1;
+    GPIO_InitStruct.Pin = GPIO_PIN_2 | GPIO_PIN_3;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD; /* 开漏 */
     GPIO_InitStruct.Pull = GPIO_PULLUP;     /* 上拉 */
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -93,7 +126,7 @@ void interface_init(void)
     HdmaCh1.Init.Priority = DMA_PRIORITY_VERY_HIGH;         /* 通道优先级为很高 */
 
     HAL_DMA_Init(&HdmaCh1);               /* 初始化DMA通道1 */
-    __HAL_LINKDMA(hi2c, hdmatx, HdmaCh1); /* DMA1关联IIC_TX */
+    __HAL_LINKDMA(&I2cHandle, hdmatx, HdmaCh1); /* DMA1关联IIC_TX */
 
     /* 配置DMA句柄（用于接收） */
     HdmaCh2.Instance = DMA1_Channel2;                       /* 选择DMA通道1 */
@@ -106,7 +139,7 @@ void interface_init(void)
     HdmaCh2.Init.Priority = DMA_PRIORITY_HIGH;              /* 通道优先级为高 */
 
     HAL_DMA_Init(&HdmaCh2);               /* 初始化DMA通道1 */
-    __HAL_LINKDMA(hi2c, hdmarx, HdmaCh2); /* DMA1关联IIC_RX */
+    __HAL_LINKDMA(&I2cHandle, hdmarx, HdmaCh2); /* DMA1关联IIC_RX */
 
     HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 0, 0); /* 中断优先级设置 */
     HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);         /* 使能DMA通道1中断 */
@@ -116,7 +149,7 @@ void interface_init(void)
 
     while (HAL_I2C_Slave_Receive_DMA(&I2cHandle, (uint8_t *)aRxBuffer, 1) != HAL_OK)
     {
-        Error_Handler();
+        while(1);
     }
 }
 
@@ -131,7 +164,7 @@ void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *hi2c)
         RxBuffer_index = 0;
         while (HAL_I2C_Slave_Receive_DMA(&I2cHandle, &(aRxBuffer[RxBuffer_index]), 1) != HAL_OK)
         {
-            Error_Handler();
+            while(1);
         }
         return;
     }

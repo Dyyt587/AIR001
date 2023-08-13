@@ -23,6 +23,7 @@
 #include "main.h"
 #include <rtthread.h>
 #include "ws2812_spi_dma.h"
+#include "interface_iic.h"
 #include "motor_pwm.h"
 
 #include "encode.h"
@@ -80,7 +81,7 @@ int main(void)
 	
 	pid_angle.Kp = 10;
 
-  
+  interface_init();
   while (1)
   {
 //		set_Speed(200);
@@ -92,7 +93,7 @@ int main(void)
     rt_kprintf("Angle:%d   \r\n",a);
 		// rt_kprintf("PID:%d,%d,%d\r\n",pid_speed.Kp,pid_speed.Ki,pid_speed.Kd);
 		
-//		 RGB_Reflash();
+		 RGB_Reflash();
 
 //		static int cnt=0;
 //		Motor_Set_CH2(5000);

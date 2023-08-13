@@ -68,22 +68,22 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi)
       PA4-NSS(AF0)
     */
     /* SPI CS*/
-    GPIO_InitStruct.Pin = GPIO_PIN_4;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-    if (hspi->Init.CLKPolarity == SPI_POLARITY_LOW)
-    {
-      GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-    }
-    else
-    {
-      GPIO_InitStruct.Pull = GPIO_PULLUP;
-    }
-    GPIO_InitStruct.Alternate = GPIO_AF0_SPI1;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_SET);
+    // GPIO_InitStruct.Pin = GPIO_PIN_4;
+    // GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+    // if (hspi->Init.CLKPolarity == SPI_POLARITY_LOW)
+    // {
+    //   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+    // }
+    // else
+    // {
+    //   GPIO_InitStruct.Pull = GPIO_PULLUP;
+    // }
+    // GPIO_InitStruct.Alternate = GPIO_AF0_SPI1;
+    // GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    // HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_SET);
     /*GPIO配置为SPI：SCK/MISO/MOSI*/
-    GPIO_InitStruct.Pin       = GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;
+    GPIO_InitStruct.Pin       = GPIO_PIN_4 | GPIO_PIN_6 | GPIO_PIN_7;
     GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF0_SPI1;

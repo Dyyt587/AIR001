@@ -2,12 +2,11 @@
  * @Author: dyyt
  * @Date: 2023-08-12 16:11:04
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-08-13 14:05:34
+ * @LastEditTime: 2023-08-13 14:11:02
  * @FilePath: \Air001_rtt-main\Src\interface_iic.c
  * @Description:
  */
 #include "interface_iic.h"
-#include "air001xx_hal_gpio_ex.h"
 #include "air001xx_hal.h"
 #include "stdlib.h"
 #include "string.h"
@@ -32,6 +31,7 @@ enum
     Standerby_Mode = 0,
     Speed_Mode,
     Angle_Mode,
+    Return_Mode,
 };
 typedef struct
 {
@@ -54,13 +54,18 @@ void Rx_Pack_Callback(void)
     {
         control.mode = Speed_Mode;
         control.speed_target = param[0];
-        Set_Speed(param[0]);
+        Set_Speed(param[0]);//直接输出给电机驱动
     }
     else if (cmd == 'P')
     {
         control.mode = Angle_Mode;
         control.angle_target = param[0];
         Set_Angle(param[0]);
+    }
+        else if (cmd == 'I')
+    {
+        control.mode = Return_Mode;
+        //TODO:完成回传数据
     }
     else
     {

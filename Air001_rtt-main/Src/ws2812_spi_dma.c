@@ -19,8 +19,8 @@ DMA_HandleTypeDef HdmaCh3;
 		Spi1Handle.Instance               = SPI1;                       /* SPI1 */
 		Spi1Handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;    /* 2分频 */
 		Spi1Handle.Init.Direction         = SPI_DIRECTION_2LINES;       /* 全双工 */
-		Spi1Handle.Init.CLKPolarity       = SPI_POLARITY_HIGH;           /* 时钟极性低 */
-		Spi1Handle.Init.CLKPhase          = SPI_PHASE_2EDGE ;           /* 数据采样从第一个时钟边沿开始 */
+		Spi1Handle.Init.CLKPolarity       = SPI_POLARITY_LOW;           /* 时钟极性低 */
+		Spi1Handle.Init.CLKPhase          = SPI_PHASE_1EDGE ;           /* 数据采样从第一个时钟边沿开始 */
 		Spi1Handle.Init.DataSize          = SPI_DATASIZE_8BIT;          /* SPI数据长度为8bit */
 		Spi1Handle.Init.FirstBit          = SPI_FIRSTBIT_MSB;           /* 先发送MSB */
 		Spi1Handle.Init.NSS               = SPI_NSS_SOFT;        /* NSS软件模式(硬件模式) */
@@ -146,7 +146,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi)
 }
 
 #endif
-#define LED_NUM 2	// LED灯珠个数
+#define LED_NUM 3	// LED灯珠个数
 
 // 模拟bit码: 0x80为逻辑0, 0xF8为逻辑1
 const uint8_t code[]={0x80,0xF8};
@@ -173,10 +173,10 @@ void Set_LEDColor(uint16_t LedId, RGBColor_TypeDef Color)
 static void SPI_Send_WS2812(uint8_t *SPI_RGB_BUFFER)
 {
     // 判断上次DMA有没有传输完成
-    while(HAL_DMA_GetState(&HdmaCh1) != HAL_DMA_STATE_READY);
+    //while(HAL_DMA_GetState(&HdmaCh1) != HAL_DMA_STATE_READY);
     // 发送一个24bit的RGB数据
-    HAL_SPI_Transmit_DMA(&Spi1Handle, SPI_RGB_BUFFER, 24);
-    //HAL_SPI_Transmit(&Spi1Handle, SPI_RGB_BUFFER, 24,1);
+    //HAL_SPI_Transmit_DMA(&Spi1Handle, SPI_RGB_BUFFER, 24);
+    HAL_SPI_Transmit(&Spi1Handle, SPI_RGB_BUFFER, 24,1);
 }
 
 /**

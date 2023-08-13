@@ -65,7 +65,7 @@ int main(void)
   BSP_LED_Init(LED_RED);
 	WS2812Init();
 
-	Set_LEDColor(0 , WS2812_BLUE );
+	Set_LEDColor(0 , WS2812_RED );
 
   rt_kprintf("The current running frequency is %d Hz\r\n", HAL_RCC_GetSysClockFreq());
 	
@@ -100,8 +100,8 @@ int main(void)
 //		cnt+=10;
 //		if(cnt>=1000)cnt=0;
 //    /* 翻转LED */
-//    BSP_LED_Toggle(LED_RED);
-    rt_thread_mdelay(5);
+    BSP_LED_Toggle(LED_RED);
+    rt_thread_mdelay(50);
   }
 }
 

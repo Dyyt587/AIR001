@@ -120,19 +120,6 @@ void SVC_Handler(void)
 	
 	
 
-/**
-  * @brief This function handles SPI1 Interrupt .
-  */
-void SPI1_IRQHandler(void)
-{
-		  rt_interrupt_enter(); 
-
-  HAL_SPI_IRQHandler(&Spi1Handle);
-
-  rt_interrupt_leave(); 
-
-}
-
 
 void DMA1_Channel1_IRQHandler(void)
 {
@@ -169,5 +156,16 @@ void I2C1_IRQHandler(void)
   HAL_I2C_ER_IRQHandler(&I2cHandle);
 	
 	 rt_interrupt_leave();
+}
+/**
+  * @brief This function handles SPI1 Interrupt .
+  */
+
+/**
+  * @brief This function handles SPI1 Interrupt .
+  */
+void SPI2_IRQHandler(void)
+{
+  HAL_SPI_IRQHandler(&Spi1Handle2);
 }
 /************************ (C) COPYRIGHT AirM2M *****END OF FILE******************/

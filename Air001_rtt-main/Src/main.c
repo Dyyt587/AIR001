@@ -23,7 +23,7 @@
 #include "main.h"
 #include <rtthread.h>
 #include "ws2812_spi_dma.h"
-#include "interface_iic.h"
+#include "iic.h"
 #include "motor_pwm.h"
 
 #include "encode.h"
@@ -39,6 +39,8 @@ const RGBColor_TypeDef WS2812_BLUE = {0, 0, 255};
 
 
 extern UART_HandleTypeDef DebugUartHandle;
+
+uint8_t aRx[20] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 int ee_printf(const char *fmt, ...)
 {
@@ -88,18 +90,25 @@ int main(void)
 //		int a = (int)get_Speed();
 //    rt_kprintf("Speed:%d   \r\n",a);
 //		
-		Set_Angle(500);
-		int a = (int)get_Angle();
-    rt_kprintf("Angle:%d   \r\n",a);
-		// rt_kprintf("PID:%d,%d,%d\r\n",pid_speed.Kp,pid_speed.Ki,pid_speed.Kd);
-		
-		 RGB_Reflash();
+//		Set_Angle(500);
+//		int a = (int)get_Angle();
+//    rt_kprintf("Angle:%d   \r\n",a);
+//		// rt_kprintf("PID:%d,%d,%d\r\n",pid_speed.Kp,pid_speed.Ki,pid_speed.Kd);
+//		
+//		 RGB_Reflash();
 
 //		static int cnt=0;
 //		Motor_Set_CH2(5000);
 //		cnt+=10;
 //		if(cnt>=1000)cnt=0;
 //    /* 翻转LED */
+		uint8_t i = 0;
+		HAL_I2C_Slave_Receive_IT(&I2cHandle, (uint8_t *)aRx, 15);
+
+		for(i = 0;aRx[i] != 0;i++){
+		 rt_kprintf("%c",aRx[i]);
+		}
+		
     BSP_LED_Toggle(LED_RED);
     rt_thread_mdelay(50);
   }

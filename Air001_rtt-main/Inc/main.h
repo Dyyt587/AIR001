@@ -45,7 +45,7 @@ extern uint8_t DmaOnFlag, DmaTxRxFlag;
 /* Exported variables prototypes ---------------------------------------------*/
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
-
+extern I2C_HandleTypeDef I2cHandle;
 #ifdef __cplusplus
 }
 #endif

@@ -157,7 +157,7 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>176</LineNumber>
+          <LineNumber>48</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -166,25 +166,57 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\Src\ws2812_spi_dma.c</Filename>
+          <Filename>D:\items\GitHub\AIR001\Air001_rtt-main\Src\interface_iic.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>65</LineNumber>
+          <LineNumber>166</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>2</Address>
+          <Address>134223864</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>RTE/Device/AIR001Dev/system_air001xx.c</Filename>
+          <Filename>D:\items\GitHub\AIR001\Air001_rtt-main\Src\interface_iic.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Project\RTE/Device/AIR001Dev/system_air001xx.c\65</Expression>
+          <Expression>\\Project\../Src/interface_iic.c\166</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>161</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134233700</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>D:\items\GitHub\AIR001\Air001_rtt-main\Src\interface_iic.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Project\../Src/interface_iic.c\161</Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>569</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>C:\Users\28968\Desktop\Air001_rtt-main_ing1\Libraries\AIR001xx_HAL_Driver\Src\air001xx_hal_i2c.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Project\C:/Users/28968/Desktop/Air001_rtt-main_ing1/Libraries/AIR001xx_HAL_Driver/Src/air001xx_hal_i2c.c\569</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -212,6 +244,11 @@
           <count>4</count>
           <WinNumber>1</WinNumber>
           <ItemText>Spi1Handle</ItemText>
+        </Ww>
+        <Ww>
+          <count>5</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>aRxBuffer[16]</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
@@ -743,7 +780,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\Downloads\Air001_rtt-main\Libraries\AIR001xx_HAL_Driver\Src\air001xx_hal_i2c.c</PathWithFileName>
+      <PathWithFileName>..\Libraries\AIR001xx_HAL_Driver\Src\air001xx_hal_i2c.c</PathWithFileName>
       <FilenameWithoutPath>air001xx_hal_i2c.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -891,8 +928,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Src\interface_iic.c</PathWithFileName>
-      <FilenameWithoutPath>interface_iic.c</FilenameWithoutPath>
+      <PathWithFileName>..\Src\iic.c</PathWithFileName>
+      <FilenameWithoutPath>iic.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

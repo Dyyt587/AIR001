@@ -1,21 +1,19 @@
 #include "Wire.h"
 
 void setup(){
- Wire.begin(8);
+ Wire.begin();
  Serial.begin(115200);
+ Serial.println("h");
 }
 
 void loop(){
-          Serial.println("hello1");
-    Wire.requestFrom(8, 1, false);
-      Serial.println("hello2");
-    Serial.print(Wire.read());
-    Wire.beginTransmission(8);
-    Wire.write("hello World");
-    Serial.print("  ");
+
+    Wire.beginTransmission(4);
+    Wire.write("12\r\n");
+
     Serial.println(Wire.endTransmission(true));
 
-
+     Serial.println("h");
     delay(1000);
 
 

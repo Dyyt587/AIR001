@@ -582,7 +582,7 @@
             <File>
               <FileName>air001xx_hal_i2c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\Downloads\Air001_rtt-main\Libraries\AIR001xx_HAL_Driver\Src\air001xx_hal_i2c.c</FilePath>
+              <FilePath>..\Libraries\AIR001xx_HAL_Driver\Src\air001xx_hal_i2c.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -645,9 +645,9 @@
               <FilePath>..\Src\Motor_PWM.c</FilePath>
             </File>
             <File>
-              <FileName>interface_iic.c</FileName>
+              <FileName>iic.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Src\interface_iic.c</FilePath>
+              <FilePath>..\Src\iic.c</FilePath>
             </File>
           </Files>
         </Group>

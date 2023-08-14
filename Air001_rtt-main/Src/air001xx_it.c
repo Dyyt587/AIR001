@@ -93,29 +93,29 @@ void SVC_Handler(void)
 /**
   * @brief This function handles DMA1 channel1 Interrupt .
   */
-void DMA1_Channel1_IRQHandler(void)
-{
-	  rt_interrupt_enter(); 
+//void DMA1_Channel1_IRQHandler(void)
+//{
+//	  rt_interrupt_enter(); 
 
-  HAL_DMA_IRQHandler(Spi1Handle.hdmatx);
+//  HAL_DMA_IRQHandler(Spi1Handle.hdmatx);
 
-  rt_interrupt_leave(); 
+//  rt_interrupt_leave(); 
 
-}
+//}
 
 /**
   * @brief This function handles DMA1 channel2 and channel3 Interrupt .
   */
-void DMA1_Channel2_3_IRQHandler(void)
-{
-	
-	  rt_interrupt_enter(); 
+//void DMA1_Channel2_3_IRQHandler(void)
+//{
+//	
+//	  rt_interrupt_enter(); 
 
-  HAL_DMA_IRQHandler(Spi1Handle.hdmarx);
+//  HAL_DMA_IRQHandler(Spi1Handle.hdmarx);
 
-  rt_interrupt_leave(); 
+//  rt_interrupt_leave(); 
 
-}
+//}
 	
 	
 	
@@ -133,6 +133,26 @@ void SPI1_IRQHandler(void)
 
 }
 
+
+void DMA1_Channel1_IRQHandler(void)
+{
+	rt_interrupt_enter();
+  HAL_DMA_IRQHandler(I2cHandle.hdmatx);
+	 rt_interrupt_leave(); 
+}
+
+/**
+  * @brief This function handles DMA1 channel2 and channel3 Interrupt .
+  */
+void DMA1_Channel2_3_IRQHandler(void)
+{
+	rt_interrupt_enter();
+  HAL_DMA_IRQHandler(I2cHandle.hdmarx);
+	 rt_interrupt_leave(); 
+}
+
+
+
 void EXTI4_15_IRQHandler(void)
 {
 
@@ -141,4 +161,13 @@ void EXTI4_15_IRQHandler(void)
   rt_interrupt_leave();
 }
 
+void I2C1_IRQHandler(void)
+{
+	rt_interrupt_enter(); 
+//	extern I2C_HandleTypeDef I2cHandle;
+  HAL_I2C_EV_IRQHandler(&I2cHandle);
+  HAL_I2C_ER_IRQHandler(&I2cHandle);
+	
+	 rt_interrupt_leave();
+}
 /************************ (C) COPYRIGHT AirM2M *****END OF FILE******************/

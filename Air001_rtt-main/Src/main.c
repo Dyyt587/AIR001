@@ -34,8 +34,7 @@
 /* Private function prototypes -----------------------------------------------*/
 
 // 常见颜色定义
-const RGBColor_TypeDef WS2812_RED = {255, 128, 0};
-const RGBColor_TypeDef WS2812_BLUE = {0, 0, 255};
+const RGBColor_TypeDef WS2812_RED = {0, 255, 0};
 
 
 extern UART_HandleTypeDef DebugUartHandle;
@@ -103,7 +102,7 @@ int main(void)
 //		if(cnt>=1000)cnt=0;
 //    /* 翻转LED */
 		uint8_t i = 0;
-		HAL_I2C_Slave_Receive_IT(&I2cHandle, (uint8_t *)aRx, 15);
+		HAL_I2C_Slave_Receive_IT(&I2cHandle, (uint8_t *)aRx, 1);
 
 		for(i = 0;aRx[i] != 0;i++){
 		 rt_kprintf("%c",aRx[i]);

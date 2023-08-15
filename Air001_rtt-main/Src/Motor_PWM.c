@@ -120,33 +120,33 @@ void motor_Init(void)
 		
 		
 		
-		TimHandle14.Instance = TIM14;                                         /* 选择TIM1 */
-    TimHandle14.Init.Period = 10000;                                        /* 自动重装载值 */
-    TimHandle14.Init.Prescaler = 2 - 1;                                /* 预分频为800-1 */
-    TimHandle14.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;             /* 时钟不分频 */
-    TimHandle14.Init.CounterMode = TIM_COUNTERMODE_UP;                   /* 向上计数 */
-    TimHandle14.Init.RepetitionCounter = 1 - 1;                          /* 不重复计数 */
-    TimHandle14.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE; /* 自动重装载寄存器没有缓冲 */
-    /* 基础时钟初始化 */
-    if (HAL_TIM_PWM_Init(&TimHandle) != HAL_OK)
-    {
-        Error_Handler_Motor();
-    }
+//		TimHandle14.Instance = TIM14;                                         /* 选择TIM1 */
+//    TimHandle14.Init.Period = 10000;                                        /* 自动重装载值 */
+//    TimHandle14.Init.Prescaler = 2 - 1;                                /* 预分频为800-1 */
+//    TimHandle14.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;             /* 时钟不分频 */
+//    TimHandle14.Init.CounterMode = TIM_COUNTERMODE_UP;                   /* 向上计数 */
+//    TimHandle14.Init.RepetitionCounter = 1 - 1;                          /* 不重复计数 */
+//    TimHandle14.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE; /* 自动重装载寄存器没有缓冲 */
+//    /* 基础时钟初始化 */
+//    if (HAL_TIM_PWM_Init(&TimHandle) != HAL_OK)
+//    {
+//        Error_Handler_Motor();
+//    }
 
-    sConfig.OCMode = TIM_OCMODE_PWM1;              /* 输出配置为PWM1 */
-    sConfig.OCPolarity = TIM_OCPOLARITY_HIGH;      /* OC通道输出高电平有效 */
-    sConfig.OCFastMode = TIM_OCFAST_DISABLE;       /* 输出快速使能关闭 */
-    sConfig.OCNPolarity = TIM_OCNPOLARITY_HIGH;    /* OCN通道输出高电平有效 */
-    sConfig.OCNIdleState = TIM_OCNIDLESTATE_RESET; /* 空闲状态OC1N输出低电平 */
-    sConfig.OCIdleState = TIM_OCIDLESTATE_RESET;   /* 空闲状态OC1输出低电平 */
+//    sConfig.OCMode = TIM_OCMODE_PWM1;              /* 输出配置为PWM1 */
+//    sConfig.OCPolarity = TIM_OCPOLARITY_HIGH;      /* OC通道输出高电平有效 */
+//    sConfig.OCFastMode = TIM_OCFAST_DISABLE;       /* 输出快速使能关闭 */
+//    sConfig.OCNPolarity = TIM_OCNPOLARITY_HIGH;    /* OCN通道输出高电平有效 */
+//    sConfig.OCNIdleState = TIM_OCNIDLESTATE_RESET; /* 空闲状态OC1N输出低电平 */
+//    sConfig.OCIdleState = TIM_OCIDLESTATE_RESET;   /* 空闲状态OC1输出低电平 */
 
-    sConfig.Pulse = PULSE1_VALUE; /* CC1值为10，占空比=10/50=20% */
-    /* 配置通道1 */
-    if (HAL_TIM_PWM_ConfigChannel(&TimHandle14, &sConfig, TIM_CHANNEL_1) != HAL_OK)
-    {
-        Error_Handler_Motor();
-    }
-		
+//    sConfig.Pulse = PULSE1_VALUE; /* CC1值为10，占空比=10/50=20% */
+//    /* 配置通道1 */
+//    if (HAL_TIM_PWM_ConfigChannel(&TimHandle14, &sConfig, TIM_CHANNEL_1) != HAL_OK)
+//    {
+//        Error_Handler_Motor();
+//    }
+//		
 		
 		
 }

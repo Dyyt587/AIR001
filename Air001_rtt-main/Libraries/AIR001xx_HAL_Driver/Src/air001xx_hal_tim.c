@@ -1139,7 +1139,35 @@ HAL_StatusTypeDef HAL_TIM_OC_Stop_DMA(TIM_HandleTypeDef *htim, uint32_t Channel)
   /* Return function status */
   return HAL_OK;
 }
+/**
+  * @brief  Initializes the TIM PWM MSP.
+  * @param  htim TIM PWM handle
+  * @retval None
+  */
+__weak void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
+{
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(htim);
 
+  /* NOTE : This function should not be modified, when the callback is needed,
+            the HAL_TIM_PWM_MspInit could be implemented in the user file
+   */
+}
+
+/**
+  * @brief  DeInitializes TIM PWM MSP.
+  * @param  htim TIM PWM handle
+  * @retval None
+  */
+__weak void HAL_TIM_PWM_MspDeInit(TIM_HandleTypeDef *htim)
+{
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(htim);
+
+  /* NOTE : This function should not be modified, when the callback is needed,
+            the HAL_TIM_PWM_MspDeInit could be implemented in the user file
+   */
+}
 /**
   * @}
   */
@@ -1259,35 +1287,7 @@ HAL_StatusTypeDef HAL_TIM_PWM_DeInit(TIM_HandleTypeDef *htim)
   return HAL_OK;
 }
 
-/**
-  * @brief  Initializes the TIM PWM MSP.
-  * @param  htim TIM PWM handle
-  * @retval None
-  */
-__weak void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
-{
-  /* Prevent unused argument(s) compilation warning */
-  UNUSED(htim);
 
-  /* NOTE : This function should not be modified, when the callback is needed,
-            the HAL_TIM_PWM_MspInit could be implemented in the user file
-   */
-}
-
-/**
-  * @brief  DeInitializes TIM PWM MSP.
-  * @param  htim TIM PWM handle
-  * @retval None
-  */
-__weak void HAL_TIM_PWM_MspDeInit(TIM_HandleTypeDef *htim)
-{
-  /* Prevent unused argument(s) compilation warning */
-  UNUSED(htim);
-
-  /* NOTE : This function should not be modified, when the callback is needed,
-            the HAL_TIM_PWM_MspDeInit could be implemented in the user file
-   */
-}
 
 /**
   * @brief  Starts the PWM signal generation.

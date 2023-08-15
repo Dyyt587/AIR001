@@ -17,7 +17,17 @@ DMA_HandleTypeDef HdmaCh3;
  void WS2812Init(void)
  {
 	 
-	 
+   /*反初始化SPI配置*/
+//		Spi1Handle.Instance               = SPI1;                       /* SPI1 */
+//		Spi1Handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;    /* 2分频 */
+//		Spi1Handle.Init.Direction         = SPI_DIRECTION_1LINE;       /* 全双工 */
+//		Spi1Handle.Init.CLKPolarity       = SPI_POLARITY_LOW;           /* 时钟极性低 */
+//		Spi1Handle.Init.CLKPhase          = SPI_PHASE_1EDGE ;           /* 数据采样从第一个时钟边沿开始 */
+//		Spi1Handle.Init.DataSize          = SPI_DATASIZE_8BIT;          /* SPI数据长度为8bit */
+//		Spi1Handle.Init.FirstBit          = SPI_FIRSTBIT_MSB;           /* 先发送MSB */
+//		Spi1Handle.Init.NSS               = SPI_NSS_SOFT;        /* NSS软件模式(硬件模式) */
+//		Spi1Handle.Init.Mode = SPI_MODE_MASTER;                         /* 配置为主机 */
+//	 
 	 	Spi1Handle2.Instance               = SPI2;                       /* SPI1 */
 		Spi1Handle2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;    /* 2分频 */
 		Spi1Handle2.Init.Direction         = SPI_DIRECTION_1LINE;       /* 全双工 */
@@ -25,10 +35,21 @@ DMA_HandleTypeDef HdmaCh3;
 		Spi1Handle2.Init.CLKPhase          = SPI_PHASE_1EDGE ;           /* 数据采样从第一个时钟边沿开始 */
 		Spi1Handle2.Init.DataSize          = SPI_DATASIZE_8BIT;          /* SPI数据长度为8bit */
 		Spi1Handle2.Init.FirstBit          = SPI_FIRSTBIT_MSB;           /* 先发送MSB */
-		Spi1Handle2.Init.NSS               = SPI_NSS_SOFT;        /* NSS软件模式(模式) */
+		Spi1Handle2.Init.NSS               = SPI_NSS_SOFT;        /* NSS软件模式(硬件模式) */
 		Spi1Handle2.Init.Mode = SPI_MODE_MASTER;
 		
-
+//		if (HAL_SPI_DeInit(&Spi1Handle) != HAL_OK)
+//		{
+//			Error_Handler();
+//		}
+//		
+//		/*SPI初始化*/
+//		if (HAL_SPI_Init(&Spi1Handle) != HAL_OK)
+//		{
+//			Error_Handler();
+//		}
+//		
+		
 		
 		if (HAL_SPI_DeInit(&Spi1Handle2) != HAL_OK)
 		{

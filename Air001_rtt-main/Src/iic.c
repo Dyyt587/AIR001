@@ -131,7 +131,7 @@ void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *hi2c)
 
 
 
-#define I2C_ADDRESS        0x08             /* 本机地址0xA0 */
+#define I2C_ADDRESS        0xA0             /* 本机地址0xA0 */
 #define I2C_SPEEDCLOCK   100000             /* 通讯速度100K */
 #define I2C_DUTYCYCLE    I2C_DUTYCYCLE_2    /* 占空比 */
 

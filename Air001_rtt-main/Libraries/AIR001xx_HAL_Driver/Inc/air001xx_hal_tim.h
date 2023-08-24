@@ -1850,9 +1850,9 @@ HAL_StatusTypeDef HAL_TIM_OC_Stop_DMA(TIM_HandleTypeDef *htim, uint32_t Channel)
 /* Timer PWM functions ********************************************************/
 HAL_StatusTypeDef HAL_TIM_PWM_Init(TIM_HandleTypeDef *htim);
 HAL_StatusTypeDef HAL_TIM_PWM_DeInit(TIM_HandleTypeDef *htim);
-void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim);
-void HAL_TIM_PWM_MspDeInit(TIM_HandleTypeDef *htim);
-/* Blocking mode: Polling */
+
+
+
 HAL_StatusTypeDef HAL_TIM_PWM_Start(TIM_HandleTypeDef *htim, uint32_t Channel);
 HAL_StatusTypeDef HAL_TIM_PWM_Stop(TIM_HandleTypeDef *htim, uint32_t Channel);
 /* Non-Blocking mode: Interrupt */

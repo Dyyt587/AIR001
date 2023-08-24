@@ -90,9 +90,9 @@ void SVC_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file.                                          */
 /******************************************************************************/
-/**
-  * @brief This function handles DMA1 channel1 Interrupt .
-  */
+///**
+//  * @brief This function handles DMA1 channel1 Interrupt .
+//  */
 //void DMA1_Channel1_IRQHandler(void)
 //{
 //	  rt_interrupt_enter(); 
@@ -103,9 +103,9 @@ void SVC_Handler(void)
 
 //}
 
-/**
-  * @brief This function handles DMA1 channel2 and channel3 Interrupt .
-  */
+///**
+//  * @brief This function handles DMA1 channel2 and channel3 Interrupt .
+//  */
 //void DMA1_Channel2_3_IRQHandler(void)
 //{
 //	
@@ -116,22 +116,9 @@ void SVC_Handler(void)
 //  rt_interrupt_leave(); 
 
 //}
-	
-	
-	
-
-/**
-  * @brief This function handles SPI1 Interrupt .
-  */
-void SPI1_IRQHandler(void)
-{
-		  rt_interrupt_enter(); 
-
-  HAL_SPI_IRQHandler(&Spi1Handle);
-
-  rt_interrupt_leave(); 
-
-}
+//	
+//	
+//	
 
 
 void DMA1_Channel1_IRQHandler(void)
@@ -170,4 +157,21 @@ void I2C1_IRQHandler(void)
 	
 	 rt_interrupt_leave();
 }
+/**
+  * @brief This function handles SPI1 Interrupt .
+  */
+
+/**
+  * @brief This function handles SPI1 Interrupt .
+  */
+void SPI2_IRQHandler(void)
+{
+  HAL_SPI_IRQHandler(&Spi1Handle2);
+}
+
+//void USART1_IRQHandler(void)
+//{
+//	while(1){};
+//     HAL_UART_IRQHandler(&DebugUartHandle);
+//}
 /************************ (C) COPYRIGHT AirM2M *****END OF FILE******************/

@@ -37,9 +37,8 @@ extern "C" {
 extern DMA_HandleTypeDef HdmaCh1;
 extern DMA_HandleTypeDef HdmaCh2;
 extern DMA_HandleTypeDef HdmaCh3;
-extern SPI_HandleTypeDef Spi1Handle;
 extern uint8_t DmaOnFlag, DmaTxRxFlag;
-
+extern SPI_HandleTypeDef Spi1Handle2;
 /* Private includes ----------------------------------------------------------*/
 /* Private defines -----------------------------------------------------------*/
 /* Exported variables prototypes ---------------------------------------------*/

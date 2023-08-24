@@ -34,26 +34,13 @@
 /* Private function prototypes -----------------------------------------------*/
 
 // 常见颜色定义
-const RGBColor_TypeDef WS2812_RED = {255, 128, 0};
-const RGBColor_TypeDef WS2812_BLUE = {0, 0, 255};
+ RGBColor_TypeDef WS2812_RED = {128, 128, 128};
 
 
 extern UART_HandleTypeDef DebugUartHandle;
 
 uint8_t aRx[20] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-int ee_printf(const char *fmt, ...)
-{
-    char buf[12];
-    va_list args;
-    int len;
-    va_start(args, fmt);
-    len = vsnprintf(buf, sizeof(buf),fmt, args);
-    va_end(args);
-
-    HAL_UART_Transmit(&DebugUartHandle, (uint8_t *)buf, len, 0xFFFF);
-    return len;
-}
 
 /**
   * @brief  应用程序入口函数.
@@ -63,20 +50,40 @@ int main(void)
 {
 
 
-  /* 初始化LED */
-  BSP_LED_Init(LED_RED);
+//  /* 初始化LED */
+//  BSP_LED_Init(LED_RED);
+
+//  rt_kprintf("The current running frequency is %d Hz\r\n", HAL_RCC_GetSysClockFreq());
+//	
+//	
+//	/*初始化编码器*/
+//	//encode_Init(4,100);
+//	
+//  //motor_Init();
+//	
+
+//		WS2812Init();
+
+//	Set_LEDColor(0 , WS2812_RED );
+
+//  while (1)
+//  {
+
+//  }
+//	
+	
+	
+	  BSP_LED_Init(LED_RED);
 	WS2812Init();
+	 Set_LEDColor(0 , WS2812_RED );
 
-	Set_LEDColor(0 , WS2812_RED );
+  printf("The current running frequency is %d Hz\r\n", HAL_RCC_GetSysClockFreq());
 
-  rt_kprintf("The current running frequency is %d Hz\r\n", HAL_RCC_GetSysClockFreq());
-	
-	
 	/*初始化编码器*/
 	encode_Init(4,100);
 	
   motor_Init();
-	
+
   pid_speed.Kp = 85;
 	pid_speed.Ki = 10;
 	pid_speed.Kd = 25;
@@ -84,9 +91,26 @@ int main(void)
 	pid_angle.Kp = 10;
 
   interface_init();
+static int time=0;
+static int flag=0;
   while (1)
   {
-//		set_Speed(200);
+				if(flag==1)		time-=2;
+		else 		time+=2;
+
+
+		 RGB_Reflash();
+		WS2812_RED.R = time;
+		WS2812_RED.G = time;
+		WS2812_RED.B = time;
+		if(time>128)flag=1;
+		if(time<1)flag=0;
+	 Set_LEDColor(0 , WS2812_RED );
+
+		
+
+		
+		////		set_Speed(200);
 //		int a = (int)get_Speed();
 //    rt_kprintf("Speed:%d   \r\n",a);
 //		
@@ -103,14 +127,49 @@ int main(void)
 //		if(cnt>=1000)cnt=0;
 //    /* 翻转LED */
 		uint8_t i = 0;
-		HAL_I2C_Slave_Receive_IT(&I2cHandle, (uint8_t *)aRx, 15);
+		HAL_I2C_Slave_Receive_IT(&I2cHandle, (uint8_t *)aRx, 1);
 
 		for(i = 0;aRx[i] != 0;i++){
 		 rt_kprintf("%c",aRx[i]);
 		}
+
+	
 		
+		
+    /* 翻转LED */
     BSP_LED_Toggle(LED_RED);
-    rt_thread_mdelay(50);
+    rt_thread_mdelay(20);
+  }
+	
+}
+void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c)
+{
+	if(hi2c->Instance == I2C1)
+	{
+		//ResetFlag = 1;
+		//memset(I2CBuf_RxData,0,sizeof(I2CBuf_RxData));
+		HAL_I2C_DeInit(&I2cHandle);
+		interface_init();
+//		HAL_I2C_Slave_Receive_IT(hi2c, I2CBuf_RxData, sizeof(I2CBuf_RxData));
+		HAL_I2C_Slave_Receive_IT(&I2cHandle, (uint8_t *)aRx, 1);
+	}
+}
+void HAL_I2C_AddrCallback(I2C_HandleTypeDef *hi2c, uint8_t TransferDirection, uint16_t AddrMatchCode)
+{
+  if(TransferDirection == I2C_DIRECTION_TRANSMIT)
+  {
+	if(HAL_I2C_Slave_Seq_Receive_IT(hi2c, aRx, 1, I2C_FIRST_FRAME) != HAL_OK)
+	{
+
+	}	  
+	  
+  }
+  else if(TransferDirection == I2C_DIRECTION_RECEIVE)
+  {
+	if(HAL_I2C_Slave_Seq_Transmit_IT(hi2c, aRx, 1, I2C_LAST_FRAME)!= HAL_OK)
+	{
+		
+	}  
   }
 }
 

@@ -4603,45 +4603,45 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       600         80          4          4        137       9949   air001_core_board.o
-       120         12          0          8          4       5288   air001xx_hal.o
-       164         28          0          0          0       5415   air001xx_hal_cortex.o
-       546         16          0          0          0       8740   air001xx_hal_dma.o
-       634         16          0          0          0       4512   air001xx_hal_gpio.o
-      4020        112          0          0          0      49570   air001xx_hal_i2c.o
-       696         44          0          0          0       6761   air001xx_hal_msp.o
-      1940        116         20          0          0       9557   air001xx_hal_rcc.o
-      1232         20          0          0          0      23989   air001xx_hal_spi.o
-       894         32          0          0          0      56702   air001xx_hal_tim.o
-      1436         24          0          0          0      19105   air001xx_hal_uart.o
-       132         12          0          0          0       1997   air001xx_it.o
-       132          8          0          0          0       1674   board.o
-       108          8          0          0          4       2570   clock.o
-      1790        612        708          0          0      13280   cmd.o
-       176         32         21          0        376       3343   components.o
-       216         32          0          0          0        808   context_rvds.o
-       316        164          0          0         12       2259   cpuport.o
-       646        100          0          1        520       7778   encode.o
-        66         20          0          0        248       2120   idle.o
-       324         76          0          0        113       4868   iic.o
-       292          0          0          0          0      11038   ipc.o
-        40          0          0          0          1       1027   irq.o
-      1804        382        256          0         64      15225   kservice.o
-       392         88          0          3         25       4585   main.o
-       340         24          0          0         64       5212   motor_pwm.o
-       946        116        140          0          0       5252   msh.o
-       162          4          0         64          0       5968   object.o
-       220          0          0          0          0       2771   ringbuff.o
-       384         24          0          0         83       4469   scheduler.o
-      1352        448         21          0        829       6643   shell.o
-        28          8        192          0        768        632   startup_air001_dev.o
-        92         24        128        196          0       2357   system_air001xx.o
-       726         24          0          0          0       8984   thread.o
-       524         22          0          0         12       6657   timer.o
-       248         40          2          0        243       4306   ws2812_spi_dma.o
+       600         80          4          4        137       9943   air001_core_board.o
+       120         12          0          8          4       5282   air001xx_hal.o
+       164         28          0          0          0       5409   air001xx_hal_cortex.o
+       546         16          0          0          0       8734   air001xx_hal_dma.o
+       634         16          0          0          0       4506   air001xx_hal_gpio.o
+      4020        112          0          0          0      49564   air001xx_hal_i2c.o
+       696         44          0          0          0       6755   air001xx_hal_msp.o
+      1940        116         20          0          0       9551   air001xx_hal_rcc.o
+      1232         20          0          0          0      23983   air001xx_hal_spi.o
+       894         32          0          0          0      56696   air001xx_hal_tim.o
+      1436         24          0          0          0      19099   air001xx_hal_uart.o
+       132         12          0          0          0       1982   air001xx_it.o
+       132          8          0          0          0       1668   board.o
+       108          8          0          0          4       2555   clock.o
+      1790        612        708          0          0      13265   cmd.o
+       176         32         21          0        376       3328   components.o
+       216         32          0          0          0        796   context_rvds.o
+       316        164          0          0         12       2244   cpuport.o
+       646        100          0          1        520       7772   encode.o
+        66         20          0          0        248       2105   idle.o
+       324         76          0          0        113       4862   iic.o
+       292          0          0          0          0      11023   ipc.o
+        40          0          0          0          1       1012   irq.o
+      1804        382        256          0         64      15219   kservice.o
+       392         88          0          3         25       4579   main.o
+       340         24          0          0         64       5206   motor_pwm.o
+       946        116        140          0          0       5237   msh.o
+       162          4          0         64          0       5953   object.o
+       220          0          0          0          0       2756   ringbuff.o
+       384         24          0          0         83       4454   scheduler.o
+      1352        448         21          0        829       6637   shell.o
+        28          8        192          0        768        616   startup_air001_dev.o
+        92         24        128        196          0       2351   system_air001xx.o
+       726         24          0          0          0       8969   thread.o
+       524         22          0          0         12       6642   timer.o
+       248         40          2          0        243       4300   ws2812_spi_dma.o
 
     ----------------------------------------------------------------------
-     23780       2768       1524        276       3528     325411   Object Totals
+     23780       2768       1524        276       3528     325053   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         42          0          0          0         25          0   (incl. Padding)
 
@@ -4702,8 +4702,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     25844       2820       1524        280       3528     325799   Grand Totals
-     25844       2820       1524        280       3528     325799   ELF Image Totals
+     25844       2820       1524        280       3528     325441   Grand Totals
+     25844       2820       1524        280       3528     325441   ELF Image Totals
      25844       2820       1524        280          0          0   ROM Totals
 
 ==============================================================================
